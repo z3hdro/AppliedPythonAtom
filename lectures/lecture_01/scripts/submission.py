@@ -4,7 +4,7 @@
 
 def calculator(x: "First argument",
                y: "Second argument",
-               operator: "From set: plus, minus, mult, divide, power") -> "Result or None":
+               operator: "From set: plus, minus, mult, divide, power"):
     if operator == "plus":
         return x + y
     if operator == "minus":
@@ -18,4 +18,3 @@ def calculator(x: "First argument",
     if operator == "power":
         return x ^ y
     return None
-

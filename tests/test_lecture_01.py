@@ -10,7 +10,10 @@ from lectures.lecture_01.scripts.submission import calculator
 def load_test_data():
     import os
     output = []
-    with open(os.path.join("tests/tests_data", os.path.splitext(os.path.basename(__file__))[0] + ".ini")) as fin:
+    testname = os.path.basename(__file__)
+    testname = os.path.splitext(testname)[0]
+    with open(os.path.join("tests/tests_data",
+                           testname + ".ini")) as fin:
         for line in fin:
             output.append((line.split()[:-1], line.split()[-1]))
     return output
@@ -19,5 +22,7 @@ def load_test_data():
 def test_calculator(load_test_data):
     params = load_test_data
     for arguments, result in params:
-        assert calculator(int(arguments[0]), int(arguments[1]), arguments[2]) == int(result)
-
+        x = int(arguments[0])
+        y = int(arguments[1])
+        operation = arguments[2]
+        assert calculator(x, y, operation) == int(result)
