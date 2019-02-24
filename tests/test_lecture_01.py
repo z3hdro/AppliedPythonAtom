@@ -10,7 +10,7 @@ from lectures.lecture_01.scripts.submission import calculator
 def load_test_data():
     import os
     output = []
-    with open(os.path.join("tests_data", os.path.splitext(os.path.basename(__file__))[0] + ".ini")) as fin:
+    with open(os.path.join("tests/tests_data", os.path.splitext(os.path.basename(__file__))[0] + ".ini")) as fin:
         for line in fin:
             output.append((line.split()[:-1], line.split()[-1]))
     return output
