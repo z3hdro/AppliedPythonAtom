@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import pytest
+import gzip
 
 from lectures.lecture_01.scripts.submission import calculator
 
@@ -9,13 +10,11 @@ from lectures.lecture_01.scripts.submission import calculator
 @pytest.fixture
 def load_test_data():
     import os
-    output = []
     testname = os.path.basename(__file__)
     testname = os.path.splitext(testname)[0]
-    with open(os.path.join("tests/tests_data",
-                           testname + ".ini")) as fin:
-        for line in fin:
-            output.append((line.split()[:-1], line.split()[-1]))
+    with gzip.open(os.path.join("tests/tests_data",
+                                testname + ".tar.gz"), 'rb') as f:
+        output = f.read()
     return output
 
 
