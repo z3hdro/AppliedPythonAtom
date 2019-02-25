@@ -4,9 +4,11 @@
 import os
 
 from utils.file_processors import PickleFileProcessor
+
 from homeworks.homework_01.hw1_calculator import calculator
 from homeworks.homework_01.hw1_calcadv import advanced_calculator
 from homeworks.homework_01.hw1_brseq import is_bracket_correct
+from homeworks.homework_01.hw1_arrsearch import find_indices
 
 
 def load_test_data(func_name):
@@ -56,3 +58,21 @@ def test_bracket_sequence():
     for input_string, result in data:
         output = is_bracket_correct(input_string)
         assert output is result
+
+
+def test_search_indices():
+    data = load_test_data("listscan")
+    try:
+        find_indices([], 0)
+    except NotImplementedError:
+        return True
+    for lst, n, res in data:
+        output = find_indices(lst, n)
+        if output is None and res is None:
+            assert True
+        elif output is None:
+            assert res[0] != res[1] \
+                   and lst[res[0]] + lst[res[1]] == n
+        else:
+            assert output[0] != output[1] \
+                   and lst[output[0]] + lst[output[1]] == n
