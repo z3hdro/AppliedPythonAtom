@@ -9,6 +9,7 @@ from homeworks.homework_01.hw1_calculator import calculator
 from homeworks.homework_01.hw1_calcadv import advanced_calculator
 from homeworks.homework_01.hw1_brseq import is_bracket_correct
 from homeworks.homework_01.hw1_arrsearch import find_indices
+from homeworks.homework_01.hw1_invertint import reverse
 
 
 def load_test_data(func_name):
@@ -76,3 +77,13 @@ def test_search_indices():
         else:
             assert output[0] != output[1] \
                    and lst[output[0]] + lst[output[1]] == n
+
+
+def test_inverse_int():
+    data = load_test_data("invertint")
+    try:
+        reverse(0)
+    except NotImplementedError:
+        return True
+    for inp, out in data:
+        assert reverse(inp) == out
