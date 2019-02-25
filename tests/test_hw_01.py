@@ -31,4 +31,9 @@ def test_calculator():
         if result is None:
             assert calculator(x, y, oper) is None
             continue
-        assert abs(calculator(x, y, oper) - result) / abs(result + 0.00001) < 0.005
+        output = abs(calculator(x, y, oper) - result)
+        assert output / abs(result + 0.00001) < 0.005
+
+
+def test_string_calculator():
+    return True

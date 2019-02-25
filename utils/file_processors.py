@@ -6,6 +6,7 @@ from abc import ABC, abstractmethod
 import gzip
 import pickle
 
+
 class FileProcessor(ABC):
 
     @abstractmethod
@@ -39,4 +40,3 @@ class PickleFileProcessor(FileProcessor):
     def write_file(self, filename, data):
         with open(filename, "wb") as f:
             pickle.dump(data, f, protocol=pickle.DEFAULT_PROTOCOL)
-
