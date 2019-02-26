@@ -11,7 +11,11 @@ from homeworks.homework_01.hw1_brseq import is_bracket_correct
 from homeworks.homework_01.hw1_arrsearch import find_indices
 from homeworks.homework_01.hw1_invertint import reverse
 from homeworks.homework_01.hw1_palindrom import check_palindrom
+<<<<<<< HEAD
 from homeworks.homework_01.hw1_invertdict import invert_dict
+=======
+from homeworks.homework_01.hw1_det import calculate_determinant
+>>>>>>> 7548aeabecf5cb8b87dc0a8a9b92e448842ee69a
 
 
 def load_test_data(func_name):
@@ -101,6 +105,7 @@ def test_palindrom():
         assert check_palindrom(input_string) is answer
 
 
+<<<<<<< HEAD
 def test_inverse_dict():
     data = load_test_data("invertdict")
     try:
@@ -117,3 +122,16 @@ def test_inverse_dict():
             else:
                 assert answer[i] == output[i]
 
+=======
+def test_determinant():
+    data = load_test_data("det")
+    try:
+        calculate_determinant([[]])
+    except NotImplementedError:
+        return True
+    for mx, answer in data:
+        if answer is None:
+            assert calculate_determinant(mx) is None
+            continue
+        assert abs(calculate_determinant(mx) - answer) / abs(answer) < 0.005
+>>>>>>> 7548aeabecf5cb8b87dc0a8a9b92e448842ee69a
