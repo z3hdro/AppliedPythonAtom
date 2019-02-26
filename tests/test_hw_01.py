@@ -11,6 +11,7 @@ from homeworks.homework_01.hw1_brseq import is_bracket_correct
 from homeworks.homework_01.hw1_arrsearch import find_indices
 from homeworks.homework_01.hw1_invertint import reverse
 from homeworks.homework_01.hw1_palindrom import check_palindrom
+from homeworks.homework_01.hw1_det import calculate_determinant
 
 
 def load_test_data(func_name):
@@ -98,3 +99,16 @@ def test_palindrom():
         return True
     for input_string, answer in data:
         assert check_palindrom(input_string) is answer
+
+
+def test_determinant():
+    data = load_test_data("det")
+    try:
+        calculate_determinant([[]])
+    except NotImplementedError:
+        return True
+    for mx, answer in data:
+        if answer is None:
+            assert calculate_determinant(mx) is None
+            continue
+        assert abs(calculate_determinant(mx) - answer) / abs(answer) < 0.005
