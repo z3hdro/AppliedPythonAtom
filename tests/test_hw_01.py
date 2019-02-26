@@ -10,6 +10,7 @@ from homeworks.homework_01.hw1_calcadv import advanced_calculator
 from homeworks.homework_01.hw1_brseq import is_bracket_correct
 from homeworks.homework_01.hw1_arrsearch import find_indices
 from homeworks.homework_01.hw1_invertint import reverse
+from homeworks.homework_01.hw1_palindrom import check_palindrom
 
 
 def load_test_data(func_name):
@@ -87,3 +88,13 @@ def test_inverse_int():
         return True
     for inp, out in data:
         assert reverse(inp) == out
+
+
+def test_palindrom():
+    data = load_test_data("palindrom")
+    try:
+        check_palindrom("")
+    except NotImplementedError:
+        return True
+    for input_string, answer in data:
+        assert check_palindrom(input_string) is answer
