@@ -11,6 +11,7 @@ from homeworks.homework_01.hw1_brseq import is_bracket_correct
 from homeworks.homework_01.hw1_arrsearch import find_indices
 from homeworks.homework_01.hw1_invertint import reverse
 from homeworks.homework_01.hw1_palindrom import check_palindrom
+from homeworks.homework_01.hw1_invertdict import invert_dict
 
 
 def load_test_data(func_name):
@@ -98,3 +99,21 @@ def test_palindrom():
         return True
     for input_string, answer in data:
         assert check_palindrom(input_string) is answer
+
+
+def test_inverse_dict():
+    data = load_test_data("invertdict")
+    try:
+        invert_dict("")
+    except NotImplementedError:
+        return True
+    for test_case in data:
+        input_string, answer = test_case['test_data'], test_case['true']
+        output = invert_dict(input_string)
+        assert len(answer) == len(output)
+        for i in answer:
+            if isinstance(answer[i], list):
+                assert sorted(answer[i]) == sorted(output[i])
+            else:
+                assert answer[i] == output[i]
+
