@@ -1,4 +1,7 @@
-# AppliedPythonAtom
+# AppliedPythonAtom  [![Build Status](https://travis-ci.com/Kinetikm/AppliedPythonAtom.svg?branch=master)](https://travis-ci.com/Kinetikm/AppliedPythonAtom)
+
+
+
 
 Course: https://atom.mail.ru/curriculum/program/discipline/751/
 
