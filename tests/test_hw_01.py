@@ -74,9 +74,9 @@ def test_search_indices():
         output = find_indices(lst, n)
         if output is None and res is None:
             assert True
-        elif output is None:
-            assert res[0] != res[1] \
-                   and lst[res[0]] + lst[res[1]] == n
+        elif output is None and res[0] != res[1] \
+                and lst[res[0]] + lst[res[1]] == n:
+            assert False
         else:
             assert output[0] != output[1] \
                    and lst[output[0]] + lst[output[1]] == n
