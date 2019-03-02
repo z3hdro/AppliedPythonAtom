@@ -15,7 +15,7 @@ def find_indices(input_list, n):
     '''
     for x in range(len(input_list)):
         for y in range(x + 1, len(input_list)):
-            if x + y is n:
+            if input_list[x] + input_list[y] is n:
                 ans = tuple([x, y])
                 return ans
     return None
