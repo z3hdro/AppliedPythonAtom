@@ -10,7 +10,7 @@ def reverse(number):
     :param number: исходное число
     :return: инвертированное число
     '''
-     if number >= 0:
+    if number >= 0:
         flag = 0
     else:
         flag = 1
