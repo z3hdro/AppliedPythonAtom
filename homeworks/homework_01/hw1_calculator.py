@@ -14,13 +14,13 @@ def calculator(x, y, operator):
         float(x)
         float(y)
     except:
-         return None
+        return None
     if operator == "plus":
-            return x + y
+        return x + y
     if operator == "minus":
-            return x - y
+        return x - y
     if operator == "mult":
-            return x * y
+        return x * y
     if operator == "divide":
         if y != 0:
             return x / y
