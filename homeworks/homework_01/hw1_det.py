@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+
 def min(matrix, j):
     return matrix[j][0], [row[1:] for row in matrix[:j] + matrix[j + 1:]]
 
