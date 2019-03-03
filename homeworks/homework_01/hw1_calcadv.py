@@ -22,5 +22,5 @@ def advanced_calculator(input_string):
             if "[" in elm or "]" in elm:
                 return None
         return eval(input_string)
-    except:
+    except SyntaxError:
         return None
