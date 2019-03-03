@@ -10,4 +10,17 @@ def advanced_calculator(input_string):
     :param input_string: строка, содержащая выражение
     :return: результат выполнение операции, если строка валидная - иначе None
     '''
-    raise NotImplementedError
+    try:
+        x = re.findall("[0-9]",input_string)
+        if len(x) == 0:
+            return None
+        if "**" in input_string:
+            return None
+        for elm in input_string:
+            if elm.isalpha() or "," in elm:
+                return None
+            if "[" in elm or "]" in elm:
+                return None
+        return eval(input_string)
+    except:
+        return None
