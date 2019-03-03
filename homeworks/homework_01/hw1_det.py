@@ -2,9 +2,8 @@
 # coding: utf-8
 
 def min(matrix, j):
-        return matrix[j][0], [row[1:] for row in matrix[:j] + matrix[j + 1:]]
-    
-    
+    return matrix[j][0], [row[1:] for row in matrix[:j] + matrix[j + 1:]]
+
 def det(matrix):
     if len(matrix) == 1:
         return matrix[0][0]
@@ -13,7 +12,6 @@ def det(matrix):
         A, M = min(matrix, j)
         ans += ((-1) ** j) * A * det(M)
     return ans
-
 
 def calculate_determinant(list_of_lists):
     '''
