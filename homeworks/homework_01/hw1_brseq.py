@@ -15,7 +15,7 @@ def is_bracket_correct(input_string):
         s = s.replace("[]", "")
         s = s.replace("()", "")
         s = s.replace("{}", "")
-    if s != "":
-        return False
-    else:
+    if s == "":
         return True
+    else:
+        return False
