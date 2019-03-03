@@ -11,7 +11,7 @@ def advanced_calculator(input_string):
     :return: результат выполнение операции, если строка валидная - иначе None
     '''
     try:
-        x = re.findall("[0-9]",input_string)
+        x = re.findall("[0-9]", input_string)
         if len(x) == 0:
             return None
         if "**" in input_string:
