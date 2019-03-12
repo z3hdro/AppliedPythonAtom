@@ -16,4 +16,4 @@ if __name__ == '__main__':
         raise SystemExit("Файл не валиден")
     code = str(file_encoding(filename))
     extension = file_format(filename, code)
-    take_data_file(extension,filename, code)
+    take_data_file(extension, filename, code)
