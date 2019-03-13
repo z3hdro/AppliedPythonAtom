@@ -91,3 +91,46 @@ def test_hashmap_05():
         hashmap.put(i, j)
         assert hashmap.get(i) == j
     assert hashmap.get("nexit", "default") == "default"
+
+
+def test_hashmap_06():
+    try:
+        hashmap = HashMap(10)
+    except NotImplementedError:
+        return True
+    entries = [(5, 7), ("entries", 56), ("value", 54.), (1000, "t"), (HashMap(10), ())]
+    for k, v in entries:
+        hashmap.put(k, v)
+    output_values = set()
+    output_keys = set()
+    for v in hashmap.values():
+        output_values.add(v)
+    for k in hashmap.keys():
+        output_keys.add(k)
+    for k, v in entries:
+        assert k in output_keys
+        assert v in output_values
+    output_values = set()
+    output_keys = set()
+    for k, v in hashmap.items():
+        output_values.add(v)
+        output_keys.add(k)
+    for k, v in entries:
+        assert k in output_keys
+        assert v in output_values
+
+
+def test_hashmap_07():
+    try:
+        hashmap = HashMap(2)
+    except NotImplementedError:
+        return True
+    entries = [(5, 7), ("entries", 56), ("value", 54.), (1000, "t"), (HashMap(10), ())]
+    for k, v in entries:
+        hashmap.put(k, v)
+    assert len(hashmap) == 5
+    for k, v in entries:
+        hashmap.put(k, v)
+    assert len(hashmap) == 5
+    for k, v in entries:
+        assert k in hashmap
