@@ -45,15 +45,17 @@ class OrdinaryFileWorker(RemoteFileReader):
 
 class MockOrdinaryFileWorker(OrdinaryFileWorker):
     '''
-    Необходимо реализовать данный класс так, чтобы
+    Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
       при transfer_to_remote считывал filename
      из локальной директории ./test_dir и сохранял filename.tmp
-     в локальной директории ./tmp
+     в локальной директории ./tmpf
       при transfer_to_local считывал filename.tmp
      из локальной директории ./test_dir и сохранял в filename
-     в локальной директории ./tmp
+     в локальной директории ./tmpf
       при удалении объекта директория ./tmp должна удаляться
       при создании объекта, директория ./tmp должна создаваться
      если еще не создана
     '''
+    def __init__(self):
+        raise NotImplementedError

@@ -3,6 +3,7 @@
 
 import random
 import time
+import os
 
 from homeworks.homework_03.hw3_hashmap import HashMap
 from homeworks.homework_03.hw3_hashset import HashSet
@@ -300,6 +301,49 @@ def test_lrucache_04():
     assert my_global_vars[3] != get_sq(3)
 
     time.sleep(10)
-    t_start = time.time()
     get_sq(3)
     assert my_global_vars[3] == get_sq(3)
+
+
+def test_testing_01():
+    try:
+        mock = MockOrdinaryFileWorker()
+    except NotImplementedError:
+        return True
+    assert "tmpf" in os.listdir(".")
+    mock.transfer_to_local("filename")
+    with open("./tmpf/filename", "r") as f:
+        file_1 = f.readline()
+    with open("./homeworks/homework_03/test_dir/filename.tmp", "r") as f:
+        file_2 = f.readline()
+    assert file_1.strip() == file_2.strip()
+    del mock
+    assert "tmpf" not in os.listdir(".")
+
+
+def test_testing_02():
+    try:
+        mock = MockOrdinaryFileWorker()
+    except NotImplementedError:
+        return True
+    assert "tmpf" in os.listdir(".")
+    mock.transfer_to_remote("filename")
+    with open("./tmpf/filename.tmp", "r") as f:
+        file_1 = f.readline()
+    with open("./homeworks/homework_03/test_dir/filename", "r") as f:
+        file_2 = f.readline()
+    assert file_1.strip() == file_2.strip()
+    del mock
+    assert "tmpf" not in os.listdir(".")
+
+
+def test_testing_03():
+    try:
+        mock = MockOrdinaryFileWorker()
+    except NotImplementedError:
+        return True
+    assert "tmpf" in os.listdir(".")
+    mock_2 = MockOrdinaryFileWorker()
+    assert "tmpf" in os.listdir(".")
+    del mock_2
+    assert "tmpf" not in os.listdir(".")
