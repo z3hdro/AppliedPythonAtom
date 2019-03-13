@@ -134,3 +134,52 @@ def test_hashmap_07():
     assert len(hashmap) == 5
     for k, v in entries:
         assert k in hashmap
+
+
+def test_hashset_01():
+    try:
+        hashset = HashSet()
+    except NotImplementedError:
+        return True
+    entries = [5, 7, "entries", 56, "value", 54., 1000, "t", HashMap(10), ()]
+    for i in entries:
+        hashset.put(i)
+    for i in entries:
+        assert hashset.get(i)
+        assert i in hashset
+
+
+def test_hashset_02():
+    try:
+        hashset = HashSet()
+    except NotImplementedError:
+        return True
+    entries = [5, 7, "entries", 56, "value", 54., 1000, "t", HashMap(10), ()]
+    for i in entries:
+        hashset.put(i)
+    assert len(hashset) == len(entries)
+
+
+def test_hashset_03():
+    try:
+        hashset = HashSet()
+    except NotImplementedError:
+        return True
+    entries = [5, 7, "entries", 56, "value", 54., 1000, "t", HashMap(10), ()]
+    for i in entries:
+        hashset.put(i)
+    output_values = set()
+    for i in hashset.values():
+        output_values.add(i)
+    for i in entries:
+        assert i in output_values
+
+
+def test_hashset_04():
+    try:
+        hashset = HashSet()
+    except NotImplementedError:
+        return True
+    hashset.put("entry")
+    hashset.put("entry")
+    assert len(hashset) == 1
