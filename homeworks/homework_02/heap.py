@@ -20,16 +20,19 @@ class Heap:
         left = 2 * i + 1
         right = 2 * i + 2
         largest = i
-        if left < len(self.heap) and \
-                comparator_d(self.heap[left], self.heap[largest]):
-            largest = left
+        while True:
+            if left < len(self.heap) and \
+                    comparator_d(self.heap[left], self.heap[largest]):
+                largest = left
 
-        if right < len(self.heap) and \
-                comparator_d(self.heap[right], self.heap[largest]):
-            largest = right
-        if largest != i:
+            if right < len(self.heap) and \
+                    comparator_d(self.heap[right], self.heap[largest]):
+                largest = right
+            if largest == i:
+                break
+                
             self.heap[i], self.heap[largest] = self.heap[largest], self.heap[i]
-            self.siftdown(largest)
+            i.largest
 
     def add(self, elem_with_priority):
         self.heap.append(elem_with_priority)
