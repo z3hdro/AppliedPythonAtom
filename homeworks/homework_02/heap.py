@@ -32,7 +32,7 @@ class Heap:
                 break
                 
             self.heap[i], self.heap[largest] = self.heap[largest], self.heap[i]
-            i.largest
+            i = largest
 
     def add(self, elem_with_priority):
         self.heap.append(elem_with_priority)
