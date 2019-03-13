@@ -51,10 +51,10 @@ class VKPoster:
         :param followee_user_id: id пользователя. Число.
         :return: ничего
         '''
-        if follower_user_id not in self.followers:
+        if follower_user_id not in self.followers.keys():
             self.followers[follower_user_id] = [followee_user_id]
         if follower_user_id in self.followers:
-            self.followers[follower_user_id].append(followee_user_id)
+            self.followers.get(follower_user_id).append(followee_user_id)
 
     def get_recent_posts(self, user_id: int, k: int)-> list:
         '''
@@ -90,7 +90,7 @@ class VKPoster:
         heap_sort = True
         if heap_sort:
             arr = [(len(self.posted_posts.get(i)[1]), i)
-                   for i in [self.posted_posts.keys()]]
+                   for i in list(self.posted_posts.keys())]
             heap = MaxHeap(arr)
             return [heap.extract_maximum()[1] for i in range(k)]
         else:
