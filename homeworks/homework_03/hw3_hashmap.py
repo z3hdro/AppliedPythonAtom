@@ -69,10 +69,14 @@ class HashMap:
         # TODO Должен возвращать итератор пар ключ и значение (tuples)
         raise NotImplementedError
 
-    def resize(self):
+    def _resize(self):
         # TODO Время от времени нужно ресайзить нашу хешмапу
         raise NotImplementedError
 
     def __str__(self):
         # TODO Метод выводит "buckets: {}, items: {}"
+        raise NotImplementedError
+
+    def __contains__(self, item):
+        # TODO Метод проверяющий есть ли объект (через in)
         raise NotImplementedError
