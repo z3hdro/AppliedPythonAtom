@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import random
+import time
 
 from homeworks.homework_03.hw3_hashmap import HashMap
 from homeworks.homework_03.hw3_hashset import HashSet
@@ -183,3 +184,90 @@ def test_hashset_04():
     hashset.put("entry")
     hashset.put("entry")
     assert len(hashset) == 1
+
+
+def test_lrucache_01():
+
+    try:
+        @LRUCacheDecorator(maxsize=3, ttl=None)
+        def get_sq(s):
+            time.sleep(2)
+            return s ** 2
+    except NotImplementedError:
+        return True
+
+    t_start = time.time()
+    get_sq(1)
+    assert time.time() - t_start > 0.5
+
+    t_start = time.time()
+    get_sq(1)
+    assert time.time() - t_start < 0.5
+
+
+def test_lrucache_02():
+    try:
+        @LRUCacheDecorator(maxsize=3, ttl=None)
+        def get_sq(s):
+            time.sleep(2)
+            return s ** 2
+    except NotImplementedError:
+        return True
+
+    get_sq(1)
+    get_sq(2)
+    get_sq(3)
+    get_sq(1)
+    get_sq(4)
+    get_sq(5)
+
+    t_start = time.time()
+    get_sq(1)
+    assert time.time() - t_start < 0.5
+
+
+def test_lrucache_03():
+    try:
+        @LRUCacheDecorator(maxsize=4, ttl=None)
+        def get_sq(s):
+            time.sleep(1)
+            return s ** 2
+    except NotImplementedError:
+        return True
+
+    t_start = time.time()
+    res = get_sq(1)
+    assert time.time() - t_start > 0.5
+    t_start = time.time()
+    res = get_sq(1)
+    assert time.time() - t_start < 0.5
+    l = [5, 6, 7]
+    for i in l:
+        t_start = time.time()
+        res = get_sq(i)
+        assert time.time() - t_start > 0.5
+    l = [1, 5, 6, 7]
+    for i in l:
+        t_start = time.time()
+        res = get_sq(i)
+        assert time.time() - t_start < 0.5
+    l = [7, 5, 6, 1]
+    for i in l:
+        t_start = time.time()
+        res = get_sq(i)
+        assert time.time() - t_start < 0.5
+    l = [15]
+    for i in l:
+        t_start = time.time()
+        res = get_sq(i)
+        assert time.time() - t_start > 0.5
+    l = [1, 6, 5, 15]
+    for i in l:
+        t_start = time.time()
+        res = get_sq(i)
+        assert time.time() - t_start < 0.5
+    l = [7]
+    for i in l:
+        t_start = time.time()
+        res = get_sq(i)
+        assert time.time() - t_start > 0.5
