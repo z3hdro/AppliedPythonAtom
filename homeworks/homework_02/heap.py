@@ -5,13 +5,14 @@
 class Heap:
 
     def __init__(self, array):
-        self.heap = array
+        self.heap = array[:]
         self.build_heap()
 
     def siftup(self, index: int):
         parent = (index - 1) // 2
-        while index > 0 and comparator_d(self.heap[index], self.heap[parent]):
-            self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
+        arr = self.heap
+        while index > 0 and comparator_d(arr[index], arr[parent]):
+            arr[index], arr[parent] = arr[parent], arr[index]
             index = parent
             parent = (index - 1) // 2
 
