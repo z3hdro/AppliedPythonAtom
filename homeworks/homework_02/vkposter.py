@@ -21,7 +21,7 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        if post_id not in self.posted_posts:
+        if post_id not in self.posted_posts.keys():
             self.posted_posts[post_id] = [user_id, []]
         if user_id not in self.user_posts.keys():
             self.user_posts[user_id] = [post_id]
@@ -53,7 +53,7 @@ class VKPoster:
         '''
         if follower_user_id not in self.followers.keys():
             self.followers[follower_user_id] = [followee_user_id]
-        if follower_user_id in self.followers:
+        else:
             self.followers.get(follower_user_id).append(followee_user_id)
 
     def get_recent_posts(self, user_id: int, k: int)-> list:
@@ -67,9 +67,10 @@ class VKPoster:
         '''
         heap_sort = True
         if heap_sort:
-            arr = [self.user_posts.get(i) for i in self.followers.get(user_id)
-                   if i in self.user_posts.keys()]
-            return FastSortedListMerger.merge_first_k(arr, k)
+            return FastSortedListMerger.merge_first_k(
+                [self.user_posts.get(i)for i in
+                 self.followers.get(user_id) if i in
+                 self.user_posts.keys()], k)
         else:
             recent_posts = []
             for key, value in self.posted_posts.items():
