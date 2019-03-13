@@ -72,7 +72,7 @@ def test_hashmap_04():
             if j == i:
                 assert entry_one == entry_two
             else:
-               assert entry_one != entry_two
+                assert entry_one != entry_two
 
 
 def test_hashmap_05():
