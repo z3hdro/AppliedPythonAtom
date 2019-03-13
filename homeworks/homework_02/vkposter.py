@@ -2,8 +2,8 @@
 # coding: utf-8
 
 
-from heap import MaxHeap
-from fastmerger import FastSortedListMerger
+from homeworks.homework_02.heap import MaxHeap
+from homeworks.homework_02.fastmerger import FastSortedListMerger
 
 
 class VKPoster:
