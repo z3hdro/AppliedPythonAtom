@@ -187,6 +187,40 @@ def test_hashset_04():
     assert len(hashset) == 1
 
 
+def test_hashset_05():
+    try:
+        hashset = HashSet()
+    except NotImplementedError:
+        return True
+    hashset_2 = HashSet()
+    entries = [5, 7, "entries", 56, "value", 54., 1000, "t", HashMap(10), ()]
+    for k in entries:
+        hashset.put(k)
+        hashset_2.put(k)
+    hashset_3 = hashset.intersect(hashset_2)
+    assert hashset_3 is not hashset
+    assert hashset_3 is not hashset_2
+    assert len(hashset_3) == len(entries)
+
+
+def test_hashset_05():
+    try:
+        hashset = HashSet()
+    except NotImplementedError:
+        return True
+    hashset_2 = HashSet()
+    entries = [5, 7, "entries", 56, "value", 54., 1000, "t", HashMap(10), ()]
+    for i, k in enumerate(entries):
+        if i%2 == 0:
+            hashset.put(k)
+            continue
+        hashset_2.put(k)
+    hashset_3 = hashset.intersect(hashset_2)
+    assert hashset_3 is not hashset
+    assert hashset_3 is not hashset_2
+    assert len(hashset_3) == len(entries)
+
+
 def test_lrucache_01():
 
     try:
