@@ -450,7 +450,7 @@ def test_groupping_anagramms_03():
 
 def test_event_stats_01():
     try:
-        pass
+        revert_linked_list(None)
     except NotImplementedError:
         return True
 
