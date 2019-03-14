@@ -8,7 +8,10 @@ import os
 from homeworks.homework_03.hw3_hashmap import HashMap
 from homeworks.homework_03.hw3_hashset import HashSet
 from homeworks.homework_03.hw3_lrucache import LRUCacheDecorator
-from homeworks.homework_03.hw3_testing import MockOrdinaryFileWorker
+from homeworks.homework_03.hw3_testing import MockOrdinaryFileWorker, LLNode
+from homeworks.homework_03.hw3_event_stats import TEventStats
+from homeworks.homework_03.hw3_revert_linked_list import revert_linked_list
+from homeworks.homework_03.hw3_groupping_anagramms import groupping_anagramms
 
 
 def test_hashmap_01():
@@ -381,3 +384,141 @@ def test_testing_03():
     assert "tmpf" in os.listdir(".")
     del mock_2
     assert "tmpf" not in os.listdir(".")
+
+
+def test_groupping_anagramms_01():
+    try:
+        groupping_anagramms([])
+    except NotImplementedError:
+        return True
+
+    words = """Аз есмь строка живу я мерой остр
+               За семь морей ростка я вижу рост
+               Я в мире сирота
+               Я в Риме Ариост""".split()
+
+    correct_res = [
+        ['Аз', 'За'], ['Ариост', 'сирота'],
+        ['Риме', 'мире'], ['Я', 'Я', 'я', 'я'],
+        ['в', 'в'], ['вижу', 'живу'],
+        ['есмь', 'семь'], ['мерой', 'морей'],
+        ['остр', 'рост'], ['ростка', 'строка']
+    ]
+
+    res = groupping_anagramms(words)
+    res = sorted(sorted(x) for x in res)
+    assert all(x == y for x, y in zip(res, correct_res))
+
+
+def test_groupping_anagramms_02():
+    try:
+        groupping_anagramms([])
+    except NotImplementedError:
+        return True
+
+    words = []
+    correct_res = []
+
+    res = groupping_anagramms(words)
+    assert res == correct_res
+
+
+def test_groupping_anagramms_03():
+    try:
+        groupping_anagramms([])
+    except NotImplementedError:
+        return True
+
+    words = """Лунь
+               нуль
+               Воз
+               зов
+               Чертог
+               горечь
+               Днесь
+               снедь""".split()
+
+    correct_res = [
+        ['Воз', 'зов'], ['Днесь', 'снедь'],
+        ['Лунь', 'нуль'], ['Чертог'], ['горечь']
+    ]
+
+    res = groupping_anagramms(words)
+    res = sorted(sorted(x) for x in res)
+    assert all(x == y for x, y in zip(res, correct_res))
+
+
+def test_event_stats_01():
+    try:
+        pass
+    except NotImplementedError:
+        return True
+
+    correct_res = [2, 1, 1, 0]
+
+    event_stats = TEventStats()
+
+    for user_id, ts in [
+        (122, 1552565081), (123, 1552565082), (124, 1552565092), (124, 1552565093), (123, 1552565100), (125, 1552565482)
+    ]:
+        event_stats.register_event(user_id, ts)
+
+    res = [
+        event_stats.query(2, 1552565101), event_stats.query(1, 1552565493),
+        event_stats.query(1, 1552565181), event_stats.query(0, 1552565181)
+    ]
+
+    assert all(x == y for x, y in zip(res, correct_res))
+
+
+def test_revert_linked_list_01():
+    try:
+        revert_linked_list(None)
+    except NotImplementedError:
+        return True
+
+    correct_repr = "value: 4; next_node: (value: 3; next_node: (value: 2; next_node: (value: 1; next_node: (None))))"
+
+    n1 = LLNode(1, None)
+    n2 = LLNode(2, None)
+    n3 = LLNode(3, None)
+    n4 = LLNode(4, None)
+
+    n1.next_node = n2
+    n2.next_node = n3
+    n3.next_node = n4
+
+    res = revert_linked_list(n1)
+
+    assert res.__repr__() == correct_repr
+
+
+def test_revert_linked_list_02():
+    try:
+        revert_linked_list(None)
+    except NotImplementedError:
+        return True
+
+    # test LL with single node
+    head = LLNode(0, None)
+
+    res = revert_linked_list(head)
+    assert res is head and head.next_node is None
+
+
+def test_revert_linked_list_03():
+    try:
+        revert_linked_list(None)
+    except NotImplementedError:
+        return True
+
+    correct_repr = "value: 12; next_node: (value: 42; next_node: (None))"
+
+    n1 = LLNode(42, None)
+    n2 = LLNode(12, None)
+
+    n1.next_node = n2
+
+    res = revert_linked_list(n1)
+
+    assert res.__repr__() == correct_repr
