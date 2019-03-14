@@ -314,7 +314,7 @@ def test_lrucache_04():
         @LRUCacheDecorator(maxsize=3, ttl=10)
         def get_sq(s):
             time.sleep(2)
-            global my_global_vars
+            nonlocal my_global_vars
             my_global_vars[s] = s ** 2
             return my_global_vars[s]
     except NotImplementedError:
