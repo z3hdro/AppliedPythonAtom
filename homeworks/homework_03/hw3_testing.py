@@ -73,4 +73,3 @@ class LLNode:
 
     def __repr__(self):
         return "value: {}; next_node: ({})".format(self.value, self.next_node)
-
