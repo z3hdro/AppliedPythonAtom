@@ -6,6 +6,10 @@ from homeworks.homework_03.hw3_hashmap import HashMap
 
 class HashSet:
 
+    def __init__(self):
+        # TODO Сделать правильно =)
+        raise NotImplementedError
+
     def get(self, key, default_value=None):
         # TODO достаточно переопределить данный метод
         raise NotImplementedError
