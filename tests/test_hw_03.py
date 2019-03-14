@@ -211,7 +211,7 @@ def test_hashset_05():
     hashset_2 = HashSet()
     entries = [5, 7, "entries", 56, "value", 54., 1000, "t", HashMap(10), ()]
     for i, k in enumerate(entries):
-        if i%2 == 0:
+        if i % 2 == 0:
             hashset.put(k)
             continue
         hashset_2.put(k)
