@@ -450,7 +450,7 @@ def test_groupping_anagramms_03():
 
 def test_event_stats_01():
     try:
-        revert_linked_list(None)
+        TEventStats()
     except NotImplementedError:
         return True
 
@@ -475,7 +475,7 @@ def test_event_stats_01():
 
 def test_revert_linked_list_01():
     try:
-        TEventStats()
+        revert_linked_list(None)
     except NotImplementedError:
         return True
 
