@@ -475,7 +475,7 @@ def test_event_stats_01():
 
 def test_revert_linked_list_01():
     try:
-        revert_linked_list(None)
+        TEventStats()
     except NotImplementedError:
         return True
 
