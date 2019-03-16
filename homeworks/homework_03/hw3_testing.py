@@ -59,3 +59,17 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
     '''
     def __init__(self):
         raise NotImplementedError
+
+
+class LLNode:
+    def __init__(self, value, next_node):
+        """
+        Entity (or node) for doubly linked list
+        :param value: object
+        :param next_node: LLEntity
+        """
+        self.value = value
+        self.next_node = next_node
+
+    def __repr__(self):
+        return "value: {}; next_node: ({})".format(self.value, self.next_node)
