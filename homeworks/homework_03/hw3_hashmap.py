@@ -41,7 +41,7 @@ class HashMap:
         # TODO метод get, возвращающий значение,
         #  если оно присутствует, иначе default_value
         for i in self.hash_bucket:
-            if i == None:
+            if i is None:
                 continue
             for j in i:
                 if i.key == key:
@@ -61,7 +61,7 @@ class HashMap:
             self.hash_bucket[y] = [self.Entry(key, value)]
         else:
             self.hash_bucket[y].append(self.Entry(key, value))
-                                       
+
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
         k = 0
