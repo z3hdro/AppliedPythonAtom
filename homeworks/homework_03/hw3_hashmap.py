@@ -65,8 +65,9 @@ class HashMap:
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
         k = 0
-        for i in self.hash_bucket if i is not None:
-            k += len(i)
+        for i in self.hash_bucket:
+            if i is not None:
+                k += len(i)
         return k
 
     def _get_hash(self, key):
