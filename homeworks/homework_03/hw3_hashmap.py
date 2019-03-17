@@ -41,7 +41,7 @@ class HashMap:
         # TODO метод get, возвращающий значение,
         #  если оно присутствует, иначе default_value
         for i in self.hash_bucket:
-            if i is None:
+            if not i:
                 continue
             for j in i:
                 if i.key == key:
@@ -54,7 +54,7 @@ class HashMap:
         x = self._get_hash(key)
         y = self._get_index(x)
         if self.hash_bucket[y] is None:
-            self.hash_bucket[y] = [self.Entry(key, value)] 
+            self.hash_bucket[y] = [self.Entry(key, value)]
         elif self.Entry(key, value) in self.hash_bucket[y]:
             for new_value in self.hash_bucket[y]:
                 if new_value.key == key:
