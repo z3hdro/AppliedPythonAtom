@@ -27,7 +27,7 @@ class HashMap:
 
         def __eq__(self, other):
             # TODO реализовать функцию сравнения
-            return self.key = other.key
+            return self.key == other.key
 
     def __init__(self, bucket_num=64):
         '''
