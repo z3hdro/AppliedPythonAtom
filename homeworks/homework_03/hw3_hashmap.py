@@ -60,8 +60,8 @@ class HashMap:
         elif self.hash_bucket[y] is None:
             self.hash_bucket[y] = [self.Entry(key, value)]
         else:
-            self.hash_bucket[y].append(self.Entry(key, value)
-
+            self.hash_bucket[y].append(self.Entry(key, value))
+                                       
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
         k = 0
