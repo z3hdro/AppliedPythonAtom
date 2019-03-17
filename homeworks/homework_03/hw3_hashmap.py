@@ -40,12 +40,12 @@ class HashMap:
     def get(self, key, default_value=None):
         # TODO метод get, возвращающий значение,
         #  если оно присутствует, иначе default_value
-        for i in self.hash_bucket:
-            if not i:
-                continue
-            for j in i:
-                if i.key == key:
-                    return i.value
+        x = self._get_hash(key)
+        y = self._get_index(x)
+        if self.hash_bucket[y] is not None:
+            for i in self.hash_bucket[y]:
+                if i.get_key() == key:
+                    return i.get_value()
         return default_value
 
     def put(self, key, value):
