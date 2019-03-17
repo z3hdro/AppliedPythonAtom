@@ -53,12 +53,12 @@ class HashMap:
         #  в случае, если ключ уже присутствует он его заменяет
         x = self._get_hash(key)
         y = self._get_index(x)
-        if self.Entry(key, value) in self.hash_bucket[y]:
+        if self.hash_bucket[y] is None:
+            self.hash_bucket[y] = [self.Entry(key, value)] 
+        elif self.Entry(key, value) in self.hash_bucket[y]:
             for new_value in self.hash_bucket[y]:
                 if new_value.key == key:
                     new_value.value = value
-        elif self.hash_bucket[y] is None:
-            self.hash_bucket[y] = [self.Entry(key, value)]
         else:
             self.hash_bucket[y].append(self.Entry(key, value))
 
