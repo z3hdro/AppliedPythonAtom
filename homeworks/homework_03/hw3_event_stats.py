@@ -7,7 +7,7 @@ class TEventStats:
 
     def __init__(self):
         # TODO: реализовать метод
-        raise NotImplementedError
+        self.users = {}
 
     def register_event(self, user_id, time):
         """
@@ -17,7 +17,10 @@ class TEventStats:
         :return: None
         """
         # TODO: реализовать метод
-        raise NotImplementedError
+        if user_id in self.users.keys():
+            self.users.get(user_id).append(time)
+        else:
+            self.users[user_id] = [time]
 
     def query(self, count, time):
         """
@@ -29,4 +32,16 @@ class TEventStats:
         :return: activity_count: int
         """
         # TODO: реализовать метод
-        raise NotImplementedError
+        result = []
+        for key, value in self.users.items():
+            k = 0
+            for time_user in value:
+                if time - self.FIVE_MIN < time_user <= time:
+                    k += 1
+            if count == 0 and k == 0:
+                continue
+            if k == count:
+                result.append(key)
+            else:
+                continue
+        return len(result)
