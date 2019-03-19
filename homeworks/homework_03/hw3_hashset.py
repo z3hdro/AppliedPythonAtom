@@ -14,7 +14,7 @@ class HashSet(HashMap):
         # TODO достаточно переопределить данный метод
         return super().get(key)
 
-    def put(self, key, value):
+    def put(self, key, value=None):
         # TODO метод put, нужно переопределить данный метод
         super().put(key, value)
 
