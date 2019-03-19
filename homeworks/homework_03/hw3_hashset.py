@@ -12,7 +12,7 @@ class HashSet(HashMap):
 
     def get(self, key, default_value=None):
         # TODO достаточно переопределить данный метод
-        return super().get(key)
+        return super().__contains__(key)
 
     def put(self, key, value=None):
         # TODO метод put, нужно переопределить данный метод
@@ -32,6 +32,6 @@ class HashSet(HashMap):
         new_HashSet = HashSet()
         united_values = self.values() + another_hashset.values()
         for item in united_values:
-            if item in another_hashet.values() and item in self.values():
+            if item in another_hashset.values() and item in self.values():
                 new_HashSet.put(item)
         return new_HashSet
