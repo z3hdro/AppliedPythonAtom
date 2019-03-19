@@ -24,7 +24,7 @@ class HashSet(HashMap):
 
     def values(self):
         # TODO возвращать итератор значений
-        super().__values()
+        super().keys()
 
     def intersect(self, another_hashset):
         # TODO метод, возвращающий новый HashSet
@@ -32,6 +32,5 @@ class HashSet(HashMap):
         new_HashSet = HashSet()
         united_values = self.values() + another_hashset.values()
         for i in united_values:
-            if item in another_hashet.values() and item in self.values():
-                new_HashSet.put(i)
+            new_HashSet.put(i)
         return new_HashSet
