@@ -16,15 +16,15 @@ class HashSet(HashMap):
 
     def put(self, key, value=None):
         # TODO метод put, нужно переопределить данный метод
-        super().put(key, value)
+        return super().put(key, value)
 
     def __len__(self):
         # TODO Возвращает количество Entry в массиве
-        super().__len__()
+        return super().__len__()
 
     def values(self):
         # TODO возвращать итератор значений
-        super().keys()
+        return super().keys()
 
     def intersect(self, another_hashset):
         # TODO метод, возвращающий новый HashSet
