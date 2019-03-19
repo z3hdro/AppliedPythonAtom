@@ -31,7 +31,7 @@ class HashSet(HashMap):
         #  элементы - пересечение текущего и другого
         new_HashSet = HashSet()
         united_values = self.values() + another_hashset.values()
-        for i in united_values:
+        for item in united_values:
             if item in another_hashet.values() and item in self.values():
-                new_HashSet.put(i)
+                new_HashSet.put(item)
         return new_HashSet
