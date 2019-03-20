@@ -53,7 +53,7 @@ class LocalFileWorker(RemoteFileReader):
 
     def __init__(self):
         if self.TMPF not in os.listdir("."):
-            os.mkdir(self.TMPF)
+            os.makedirs(self.TMPF)
 
     def read_file(self, filename):
         with open(self.TEST_DIR + "/" + os.path.basename(filename) + ".tmp", "r") as f:
