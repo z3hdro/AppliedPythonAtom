@@ -105,3 +105,9 @@ venv.bak/
 
 #idea
 .idea/
+
+.DS_Store
+
+# custom files
+*_my.ipynb
+*.tmp
