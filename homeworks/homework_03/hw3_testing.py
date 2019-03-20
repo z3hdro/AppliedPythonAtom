@@ -48,19 +48,19 @@ class OrdinaryFileWorker(RemoteFileReader):
 
 class LocalFileWorker(RemoteFileReader):
 
-    TEST_DIR = "homeworks/homework_03/test_dir"
-    TMPF = "tmpf"
+    TEST_DIR = 'homeworks/homework_03/test_dir'
+    TMPF = 'tmpf'
 
     def __init__(self):
         if self.TMPF not in os.listdir("."):
-            os.makedirs(self.TMPF)
+            os.mkdir(self.TMPF)
 
     def read_file(self, filename):
-        with open(self.TEST_DIR + "/" + os.path.basename(filename) + ".tmp", "r") as f:
+        with open(self.TEST_DIR + '/' + os.path.basename(filename) + '.tmp', 'r') as f:
             return f.read()
 
     def write_file(self, filename, data):
-        with open(self.TMPF + "/" + os.path.basename(filename) + ".tmp", "w") as f:
+        with open(self.TMPF + '/' + os.path.basename(filename) + '.tmp', 'w') as f:
             f.writelines(data)
 
     def __del__(self):
@@ -83,10 +83,10 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker, LocalFileWorker):
      если еще не создана
     '''
     def trasnfer_to_remote(self, filename):
-        super().transfer_to_remote(self.TEST_DIR + "/" + filename)
+        super().transfer_to_remote(self.TEST_DIR + '/' + filename)
 
     def transfer_to_local(self, filename):
-        super().transfer_to_local(self.TMPF + "/" + filename)
+        super().transfer_to_local(self.TMPF + '/' + filename)
 
 
 class LLNode:
