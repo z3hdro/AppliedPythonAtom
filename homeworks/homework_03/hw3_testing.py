@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import shutil
+import os
+
 
 class Requester:
     '''
@@ -43,7 +46,29 @@ class OrdinaryFileWorker(RemoteFileReader):
             f.write(super().read_file(filename))
 
 
-class MockOrdinaryFileWorker(OrdinaryFileWorker):
+class LocalFileWorker(RemoteFileReader):
+
+    TEST_DIR = "homeworks/homework_03/test_dir"
+    TMPF = "tmpf"
+
+    def __init__(self):
+        if self.TMPF not in os.listdir("."):
+            os.mkdir(self.TMPF)
+
+    def read_file(self, filename):
+        with open(self.TEST_DIR + "/" + os.path.basename(filename) + ".tmp", "r") as f:
+            return f.read()
+
+    def write_file(self, filename, data):
+        with open(self.TMPF + "/" + os.path.basename(filename) + ".tmp", "w") as f:
+            f.writelines(data)
+
+    def __del__(self):
+        if self.TMPF in os.listdir("."):
+            shutil.rmtree(self.TMPF)
+
+
+class MockOrdinaryFileWorker(OrdinaryFileWorker, LocalFileWorker):
     '''
     Необходимо отнаследовать данный класс так, чтобы
      он вместо запросов на удаленный сервер:
@@ -57,8 +82,11 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker):
       при создании объекта, директория ./tmp должна создаваться
      если еще не создана
     '''
-    def __init__(self):
-        raise NotImplementedError
+    def trasnder_to_remote(self, filename):
+        super().transfer_to_remote(self.TEST_DIR + "/" + filename)
+
+    def transfer_to_local(self, filename):
+        super().transfer_to_local(self.TMPF + "/" + filename)
 
 
 class LLNode:
