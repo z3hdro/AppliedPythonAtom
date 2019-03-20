@@ -82,7 +82,7 @@ class MockOrdinaryFileWorker(OrdinaryFileWorker, LocalFileWorker):
       при создании объекта, директория ./tmp должна создаваться
      если еще не создана
     '''
-    def trasnder_to_remote(self, filename):
+    def trasnfer_to_remote(self, filename):
         super().transfer_to_remote(self.TEST_DIR + "/" + filename)
 
     def transfer_to_local(self, filename):
