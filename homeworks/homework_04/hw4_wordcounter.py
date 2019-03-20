@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from multiprocessing import Process, Manager
+import os
+
 
 def word_count_inference(path_to_dir):
     '''
