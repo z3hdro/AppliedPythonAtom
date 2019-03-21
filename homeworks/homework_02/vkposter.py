@@ -2,6 +2,8 @@
 # coding: utf-8
 
 
+from collections import defaultdict, Counter
+
 from homeworks.homework_02.heap import MaxHeap
 from homeworks.homework_02.fastmerger import FastSortedListMerger
 
@@ -9,7 +11,10 @@ from homeworks.homework_02.fastmerger import FastSortedListMerger
 class VKPoster:
 
     def __init__(self):
-        raise NotImplementedError
+        self.users_posts = defaultdict(list)
+        self.posts_reads = Counter()
+        self.user_reads = defaultdict(set)
+        self.followers = defaultdict(set)
 
     def user_posted_post(self, user_id: int, post_id: int):
         '''
@@ -19,7 +24,8 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        pass
+        # посты добавляются подряд, нельзя добавить свежий пост раньше старого
+        self.users_posts[user_id].append(post_id)
 
     def user_read_post(self, user_id: int, post_id: int):
         '''
@@ -29,7 +35,10 @@ class VKPoster:
         :param post_id: id поста. Число.
         :return: ничего
         '''
-        pass
+        # тут считаем только уникальные прочтения, реализовано через set - это быстрее
+        if post_id not in self.user_reads[user_id]:
+            self.posts_reads[post_id] += 1
+            self.user_reads[user_id].add(post_id)
 
     def user_follow_for(self, follower_user_id: int, followee_user_id: int):
         '''
@@ -39,7 +48,8 @@ class VKPoster:
         :param followee_user_id: id пользователя. Число.
         :return: ничего
         '''
-        pass
+        # сделано через сет
+        self.followers[follower_user_id].add(followee_user_id)
 
     def get_recent_posts(self, user_id: int, k: int)-> list:
         '''
@@ -50,7 +60,9 @@ class VKPoster:
         :return: Список из post_id размером К из свежих постов в
         ленте пользователя. list
         '''
-        pass
+        # формируем список списков (он будет сортированным из-за того как добавляли) и мерджим
+        all_recent_posts = [self.users_posts[i][-k:] for i in self.followers[user_id]]
+        return FastSortedListMerger.merge_first_k(all_recent_posts, k)
 
     def get_most_popular_posts(self, k: int) -> list:
         '''
@@ -60,4 +72,11 @@ class VKPoster:
         необходимо вывести. Число.
         :return: Список из post_id размером К из популярных постов. list
         '''
-        pass
+        # return [i[0] for i in sorted(self.posts_reads.most_common(), key=lambda x: (x[1], x[0]), reverse=True)[:k]]
+        res = []
+        h = MaxHeap([])  # если kых элементов несколько нужно взять самый свежий.
+        for i in self.posts_reads:
+            h.add((self.posts_reads[i], i))
+        while (len(res) < k and len(h.array) > 0):
+            res.append(h.extract_maximum()[1])
+        return res
