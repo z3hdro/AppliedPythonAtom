@@ -7,8 +7,6 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-  && (echo "deb http://cran.mtu.edu/bin/linux/ubuntu xenial/" >> /etc/apt/sources.list \
-  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9) \
   && apt-get update -q && apt-get upgrade -y -q \
   && apt-get install -y -q --no-install-recommends libcurl4-openssl-dev \
                                               libssl1.0.0 \
