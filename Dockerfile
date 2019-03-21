@@ -35,4 +35,4 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
      /usr/conda/envs/py3/bin/pip install -r /workspace/requirements.txt && \
      echo "conda activate py3" >> ~/.bashrc 
 
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]
