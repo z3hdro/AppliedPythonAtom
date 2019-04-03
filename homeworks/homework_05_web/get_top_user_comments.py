@@ -10,7 +10,7 @@ async def response(url):
     resp = requests.get(url)
     if resp.ok:
         soup = BeautifulSoup(resp.text, "html.parser")
-        div = soup.findAll("div", attrs={"class":["comment__head"]})
+        div = soup.findAll("div", attrs={"class": ["comment__head"]})
         if len(div) < 100:
             return 0
         else:
