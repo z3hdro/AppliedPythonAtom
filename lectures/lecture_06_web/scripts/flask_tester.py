@@ -10,13 +10,15 @@ app = Flask(__name__)
 
 @app.route("/callme", methods=['POST'])
 def callme():
-    data = request.get_json(force=True)
+    data = request.json
+    if data is None:
+        return "Content type error"
     host = data.get("myhost", None)
     port = data.get("myport", None)
-    if not host and not port:
+    if host and port:
         key_id = random.randint(0, 1000)
-        resp = requests.get("http://{}:{}/{}".format(host, port, key_id))
-        if resp.status_code() == 200:
+        resp = requests.get("http://{}:{}/check".format(host, port), params={"id_val": key_id})
+        if resp.status_code == 200:
             print(resp.content, key_id)
         return "Nice"
     return "Error"
