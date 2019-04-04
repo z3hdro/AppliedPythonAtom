@@ -31,8 +31,8 @@ def auth():
     return jsonify({'token': token})
 
 
-# Обработка POST запроса с параметром в URL
-@auth_view.route('/<token>', methods=['POST'])
+# Обработка PATCH запроса с параметром в URL
+@auth_view.route('/<token>', methods=['PATCH'])
 def update(token):
     if token not in app.config['MEMORY']:
         abort(404)  # Не найдено

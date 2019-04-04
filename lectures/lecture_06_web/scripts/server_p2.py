@@ -38,8 +38,8 @@ def auth():
     return jsonify({'token': token})
 
 
-# Обработка POST запроса с параметром в URL
-@app.route('/update/<token>', methods=['POST'])
+# Обработка PATCH запроса с параметром в URL
+@app.route('/update/<token>', methods=['PATCH'])
 def update(token):
     if token not in memory:
         abort(404)  # Не найдено
