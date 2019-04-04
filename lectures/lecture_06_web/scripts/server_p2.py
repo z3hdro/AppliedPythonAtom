@@ -1,3 +1,4 @@
+import os
 import time
 import uuid
 
@@ -5,7 +6,7 @@ from flask import Flask, abort, request, jsonify
 
 
 # export FLASK_ENV=development
-# export FLASK_APP=post.py
+# export FLASK_APP=server_p2.py
 # flask run --host=127.0.0.1
 app = Flask(__name__)
 
@@ -77,6 +78,52 @@ def delete(token):
     if token not in memory:
         abort(404)
     del memory[token]
+    return '', 204
+
+
+app.config['UPLOAD_FOLDER'] = '/tmp'
+
+
+# Загрузка файла
+@app.route('/file/<token>', methods=['POST'])
+def upload_file(token):
+    if token not in memory:
+        abort(404)
+
+    if 'file' not in request.files or not request.files['file'].filename:
+        abort(400)
+
+    filename = token + str(time.time())
+    request.files['file'].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    return '', 204
+
+
+# Получение названия загруженных файлов пользователя
+@app.route('/file/<token>', methods=['GET'])
+def list_files(token):
+    if token not in memory:
+        abort(404)
+
+    files = next(os.walk(app.config['UPLOAD_FOLDER']))[2]
+    return jsonify([
+        file for file in files if file.startswith(token)
+    ])
+
+
+# Удаление файла
+@app.route('/file/<token>/<filename>', methods=['DELETE'])
+def delete_file(token, filename):
+    if token not in memory:
+        abort(404)
+
+    if not filename.startswith(token):
+        abort(404)
+
+    abs_path_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if not os.path.isfile(abs_path_filename):
+        abort(404)
+
+    os.remove(abs_path_filename)
     return '', 204
 
 
