@@ -24,7 +24,7 @@ class LinearRegression:
         """
         iterations = 10000
         accuracy = 0.001
-        X_const = np.hstack(((np.ones((X_train.shape[0], 1))),X_train))
+        X_const = np.hstack(((np.ones((X_train.shape[0], 1))), X_train))
         D = X_const.shape[1]
         self.w = (np.random.randn(D)).reshape(-1, 1)
         row = self.w.shape[0]
@@ -48,7 +48,6 @@ class LinearRegression:
                     self.w -= (-2) * self.lambda_coef * X_const.T @ (y_train - (X_const @ self.w)) + derivative
                 else:
                     break
-                    
 
     def predict(self, X_test):
         """
@@ -56,7 +55,7 @@ class LinearRegression:
         :param X_test: test data for predict in
         :return: y_test: predicted values
         """
-        return (np.hstack(((np.ones((X_test.shape[0], 1))),X_test))).dot(self.w)
+        return (np.hstack(((np.ones((X_test.shape[0], 1))), X_test))).dot(self.w)
 
     def get_weights(self):
         """
