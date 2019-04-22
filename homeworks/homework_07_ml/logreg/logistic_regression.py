@@ -7,7 +7,7 @@ from sklearn.metrics import log_loss
 
 
 class LogisticRegression:
-    def __init__(self,n_iter=100 , lambda_coef=1, accuracy=0.00001, regulatization=None, alpha=0.5):
+    def __init__(self, n_iter=100, lambda_coef=1, accuracy=0.00001, regulatization=None, alpha=0.5):
         """
         LogReg for Binary case
         :param lambda_coef: constant coef for gradient descent step
@@ -37,21 +37,19 @@ class LogisticRegression:
         init = log_loss(y_train, y_pred)
         for i in range(self.n_iter):
             if self.regularizarion == 'L2':
-                derivative = 2 * self.alpha * self.w 
+                derivative = 2 * self.alpha * self.w
                 derivative[0] = 0
             elif self.regularizarion == 'L1':
                 derivative = self.alpha * np.ones(m)
                 derivative[0] = 0
             else:
-                derivative = np.zeros(m) 
+                derivative = np.zeros(m)
             self.w -= -self.labmda_coef * (X_const.T @ (y_pred - y_train.reshape(-1, 1)) + derivative) / n
             y_pred = (self.predict_proba(X_train)[:, 1]).reshape(-1, 1)
             next = log_loss(y_train, y_pred)
             if np.abs(next - init) < self.accuracy:
                 break
             init = next
-
-
 
     def predict(self, X_test):
         """
