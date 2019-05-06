@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import numpy as np
+
 
 class DecisionStumpRegressor:
     '''
@@ -13,7 +15,9 @@ class DecisionStumpRegressor:
         Мы должны создать поля, чтобы сохранять наш порог th и ответы для
         x <= th и x > th
         '''
-        raise NotImplementedError
+        self.th = None
+        self.left = None
+        self.right = None
 
     def fit(self, X, y):
         '''
@@ -22,7 +26,15 @@ class DecisionStumpRegressor:
         :param y: целевая переменная (1, num_objects)
         :return: None
         '''
-        raise NotImplementedError
+        m = []
+        sort = X.argsort()
+        X = X[0, sort[0]]
+        y = y[0, sort[0]]
+        idx = np.argmin([(np.var(y[:i]) * i + np.var(y[i:]) * (y.shape[0] - i)) / y.shape[0]
+                         for i in range(1, X.shape[0])])
+        self.th = X[idx]
+        self.left = np.mean(y[:idx])
+        self.right = np.mean(y[idx:])
 
     def predict(self, X):
         '''
@@ -30,4 +42,10 @@ class DecisionStumpRegressor:
         :param X: массив размера (1, num_objects)
         :return: массив, размера (1, num_objects)
         '''
-        raise NotImplementedError
+        res = []
+        for i in X:
+            if i > self.th:
+                res.append(self.right)
+            else:
+                res.append(self.left)
+        return np.array(res)
